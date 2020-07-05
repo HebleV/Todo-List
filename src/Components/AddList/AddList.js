@@ -2,9 +2,13 @@ import React, { useState, useRef } from 'react';
 import { RenderList } from '../RenderList/RenderList';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 
-const Add = () => {
-    const [todo, setTodo] = useState([]);
+const AddList = () => {
+    const initialList = JSON.parse(window.localStorage.getItem('todolist'));
+    let currentList = initialList ? initialList : [];
+    const [todo, setTodo] = useState(currentList);
     const todoRef = useRef();
+
+    // To add the todos
     const addTodo = () => {
         let todolistVal = todoRef.current.value;
         let todoList = [];
@@ -15,8 +19,18 @@ const Add = () => {
             let todoList = JSON.parse(window.localStorage.getItem('todolist'));
             todoList.push(todolistVal)
             window.localStorage.setItem('todolist', JSON.stringify(todoList));
-            setTodo(todoList);
+            setTodo(todoList || []);
         }
+    }
+
+
+    const deleteTodoItem = (item) => {
+
+        currentList = currentList.filter((ele) => 
+             ele !== item
+        );
+        window.localStorage.setItem('todolist', JSON.stringify(currentList));
+        setTodo(currentList);
     }
     return (
         <Container>
@@ -29,13 +43,11 @@ const Add = () => {
             </Row>
             <Row>
                 <Col>
-                    <ul>
-                        <RenderList todo = {todo} />
-                    </ul>
+                    <RenderList todo={todo} deleteTodoItem={deleteTodoItem} />
                 </Col>
             </Row>
         </Container>
     )
 }
 
-export default Add;
+export default AddList;

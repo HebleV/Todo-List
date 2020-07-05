@@ -1,0 +1,8 @@
+.todoList{
+    margin:50px;
+}
+.todoItem{
+    margin:100px;
+    border:1px solid red;
+    text-align:left;
+}
