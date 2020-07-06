@@ -1,11 +1,13 @@
 import React, { useState, useRef } from 'react';
 import { RenderList } from '../RenderList/RenderList';
 import { Container, Row, Col, Button } from 'react-bootstrap';
+import styles from './AddList.module.css';
 
 const AddList = () => {
     const initialList = JSON.parse(window.localStorage.getItem('todolist'));
     let currentList = initialList ? initialList : [];
     const [todo, setTodo] = useState(currentList);
+    const [editTodo, setEditTodo] = useState();
     const todoRef = useRef();
 
     // To add the todos
@@ -22,7 +24,14 @@ const AddList = () => {
             setTodo(todoList || []);
         }
     }
-
+    const editRef = useRef();
+    const editTodoItem = (item) => {
+        // let updateTodo = document.getElementById()
+        let val = item;
+        console.log(item)
+        setEditTodo(val);
+    }
+    
 
     const deleteTodoItem = (item) => {
 
@@ -43,7 +52,7 @@ const AddList = () => {
             </Row>
             <Row>
                 <Col>
-                    <RenderList todo={todo} deleteTodoItem={deleteTodoItem} />
+                    <RenderList editRef = {editRef} todo={todo} deleteTodoItem={deleteTodoItem} editTodoItem={editTodoItem} />
                 </Col>
             </Row>
         </Container>
