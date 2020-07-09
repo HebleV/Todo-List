@@ -18,8 +18,6 @@ export function RenderList({ todo, deleteTodoItem, editTodoItem }) {
                 (todo.map(item => {
                     return (
                         <div key={generateKey(item)} className={styles.todoList}>
-                            {/* <span ref={editRef} id={generateKey(item)} className={isCompleted ? styles.completed : null}>{item}</span> */}
-                            {/* <span style={{ cursor: 'pointer' }} onClick={()=> isCompleted(item)}>Complete&nbsp;&nbsp;</span> */}
                             <span id={generateKey(item)}>{item}</span>
                             <span style={{ cursor: 'pointer' }} onClick={() => editTodoItem(item)}>Edit&nbsp;&nbsp;</span>
                             <span style={{ cursor: 'pointer' }} onClick={() => deleteTodoItem(item)}>Delete</span>

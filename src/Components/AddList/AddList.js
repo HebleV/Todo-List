@@ -7,7 +7,7 @@ const AddList = () => {
     const initialList = JSON.parse(window.localStorage.getItem('todolist'));
     let currentList = initialList ? initialList : [];
     const [todo, setTodo] = useState(currentList);
-    const [edittodo, setEditTodo] = useState();
+    const [edittodo, setEdittodo] = useState('');
     const todoRef = useRef();
 
     // To add the todos
@@ -24,18 +24,15 @@ const AddList = () => {
             setTodo(todoList || []);
         }
     }
-    const editRef = useRef();
+
     const editTodoItem = (item) => {
-        // let updateTodo = document.getElementById()
-        let val = item;
-        console.log({ val })
-        setEditTodo(val);
-        console.log({edittodo})
+        setEdittodo(item);   
     }
-
-
+    const handleTodoChange =(e) => {
+        let val = e.target.value;
+        setEdittodo(val);
+    }
     const deleteTodoItem = (item) => {
-
         currentList = currentList.filter((ele) =>
             ele !== item
         );
@@ -47,13 +44,13 @@ const AddList = () => {
             <Row>
                 <Col>
                     <h3>ToDo List....</h3>
-                    <input type='text' placeholder='Type your todos...' size='60' ref={todoRef} edittodo={edittodo}/>
+                    <input type='text' placeholder='Type your todos...' size='60' ref={todoRef} onChange={handleTodoChange}  value={edittodo} />
                     &nbsp;&nbsp;<Button variant="outline-primary" onClick={addTodo}>Add Todo</Button>
                 </Col>
             </Row>
             <Row>
                 <Col>
-                    <RenderList editRef={editRef} todo={todo} deleteTodoItem={deleteTodoItem} editTodoItem={editTodoItem} />
+                    <RenderList todo={todo} deleteTodoItem={deleteTodoItem} editTodoItem={editTodoItem} />
                 </Col>
             </Row>
         </Container>
