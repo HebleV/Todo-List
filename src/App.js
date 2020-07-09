@@ -1,13 +1,15 @@
 import React from 'react';
-import AddList from './Components/AddList/AddList.js';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css';
+import TaskList from './Components/TaskList';
+import TaskListContextProvider from './Context/TaskListContext';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
-    <div className="App">
-      <AddList />
-    </div>
+    <TaskListContextProvider>
+      <div className="App">
+        <TaskList />
+      </div>
+    </TaskListContextProvider>
   );
 }
 
