@@ -2,7 +2,7 @@ import React, { useState,useContext } from 'react';
 import { TaskListContext } from '../Context/TaskListContext';
 
 const TaskForm = () => {
-    const { addTask } = useContext(TaskListContext);
+    const { addTask, clearList } = useContext(TaskListContext);
     const [title, setTitle] = useState('');
 
     const handleChange = (e) => {
@@ -27,7 +27,7 @@ const TaskForm = () => {
             <div className='buttons'>
                 <button 
                     type='submit' className='btn add-task-btn'>Add</button>
-                <button className='btn clear-btn'>Clear</button>
+                <button className='btn clear-btn' onClick={clearList}>Clear</button>
             </div>
         </form>
     )
